@@ -1,0 +1,30 @@
+CREATE TABLE ator(
+    nome varchar(200) not null,
+    cpf varchar(14) not null,
+    constraint ator_pk primary key (cpf)
+);
+
+CREATE TABLE diretor(
+    nome varchar(200) not null,
+    cpf varchar(14) not null,
+    constraint diretor_pk primary key (cpf)
+);
+
+CREATE TABLE novela(
+    nome varchar(200) not null,
+    id int(5) not null,
+    ano int not null,
+    cpf_diretor varchar(14),
+    constraint novela_pk primary key(id),
+    constraint novela_cpf_diretor_fk foreign key (cpf_diretor) references diretor(cpf)
+);
+
+
+CREATE TABLE atua(
+    cpf_ator varchar(14),
+    id_novela int(5),
+    nome varchar(200),
+    salario float,
+    constraint atua_ator_fk foreign key (cpf_ator) references ator(cpf),
+    constraint atua_id_novela_fk foreign key (id_novela) references novela(id)
+);
