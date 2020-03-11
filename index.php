@@ -19,10 +19,10 @@
                     <a class="nav-link" href="#" id="irAtor">Ator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="irNovela">Novela</a>
+                    <a class="nav-link" href="#" id="irDiretor">Diretor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="irDiretor">Diretor</a>
+                    <a class="nav-link" href="#" id="irNovela">Novela</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="irAtua">Atua</a>
@@ -60,12 +60,12 @@
         <form type="GET" class="mt-3">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="IDNovela1">ID da novela</label>
-                    <input type="number" class="form-control cpf" id="IdNovela1" name="IdNovela1">
+                    <label for="IdNovela">ID da novela</label>
+                    <input type="number" class="form-control cpf" id="IdNovela" name="IdNovela">
                 </div>
                 <div class="form-group col-6">
-                    <label for="nome">Nome da novela</label>
-                    <input type="text" class="form-control" id="nome" name="nomeNovela">
+                    <label for="nomeNovela">Nome da novela</label>
+                    <input type="text" class="form-control" id="nomeNovela" name="nomeNovela">
                 </div>
             </div>
             <div class="row">
@@ -116,8 +116,8 @@
                     <input type="text" class="form-control cpf" id="cpfAtorAtua" name="cpfAtorAtua" placeholder="XXX.XXX.XXX-XX">
                 </div>
                 <div class="form-group col-6">
-                    <label for="IDNovela">ID da novela</label>
-                    <input type="number" class="form-control cpf" id="IdNovela" name="IdNovela">
+                    <label for="idNovela">ID da novela</label>
+                    <input type="number" class="form-control cpf" id="idNovela" name="idNovela">
                 </div>
                 <div class="form-group col-6">
                     <label for="salario">Salário</label>
@@ -157,7 +157,7 @@
             $nome = $_GET["nomeDiretor"];
 
             
-            $query = "INSERT INTO diretor VALUES ('$cpf','$nome');";
+            $query = "INSERT INTO diretor VALUES ('$nome','$cpf');";
             if (!mysqli_query($con, $query)) {
                 echo "Erro ao gravar dados: " . mysqli_error($con);
             } else {
@@ -167,10 +167,10 @@
         } else if (isset($_GET["nomeNovela"])) {
             $nome = $_GET["nomeNovela"];
             $data = $_GET["data"];
-            $id = $_GET["IdNovela1"];
+            $id = $_GET["IdNovela"];
             $cpf = $_GET["cpfDiretor2"];
 
-            $query = "INSERT INTO novela VALUES ($id,'$nome',$data', '$cpf');";
+            $query = "INSERT INTO novela VALUES ($id, '$nome', '$data', '$cpf');";
             if (!mysqli_query($con, $query)) {
                 echo "Erro ao gravar dados: " . mysqli_error($con);
             } else {
@@ -182,13 +182,13 @@
           $salario = $_GET["salario"];
           $personagem = $_GET["nome_person"];
 
-          $query = "INSERT INTO atua VALUES ($idNovela,'$cpf','$salario', '$personagem');";
+          $query = "INSERT INTO atua VALUES ('$cpf',$idNovela,$salario,'$personagem');";
           if (!mysqli_query($con, $query)) {
               echo "Erro ao gravar dados: " . mysqli_error($con);
           } else {
               echo '<script type="text/javascript">Swal.fire("Tudo certo!", "Atuação cadastrada com sucesso!", "success")</script>';
           }
-        }
+        }   
     }
 
     mysqli_close($con);
